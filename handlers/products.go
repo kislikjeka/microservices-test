@@ -1,13 +1,28 @@
+// Package classification of Product API
+//
+// Documentation Product API
+//
+// Schemes: http
+// BasePath: /
+// Version: 1.0.0
+//
+// Consumes:
+//  - application/json
+//
+// Produces:
+//  - application/json
+// swagger:meta
 package handlers
 
 import (
+	"context"
+	"fmt"
 	"github.com/kislikjeka/microservices/data"
 	"log"
 	"net/http"
-	"regexp"
-	"strconv"
 )
 
+// Product is  http.Handler
 type Product struct {
 	logger *log.Logger
 }
@@ -16,87 +31,33 @@ func NewProducts(l *log.Logger) *Product {
 	return &Product{l}
 }
 
-func (p *Product) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodGet {
-		p.getProducts(rw, r)
-		return
-	}
+type KeyProduct struct{}
 
-	if r.Method == http.MethodPost {
-		p.addProduct(rw, r)
-		return
-	}
+func (p Product) MiddlewareProductValidation(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+		prod := data.Product{}
 
-	if r.Method == http.MethodPut {
-		reg := regexp.MustCompile(`/([0-9]+)`)
-		g := reg.FindAllStringSubmatch(r.URL.Path, -1)
-		if len(g) != 1 {
-			p.logger.Println("Invalid ID more then one ID")
-			http.Error(rw,"Invalid URL",  http.StatusBadRequest)
-			return
-		}
-
-		if len(g[0]) != 2 {
-			p.logger.Println("Invalid ID more then one capture group")
-			http.Error(rw,"Invalid URL", http.StatusBadRequest)
-			return
-		}
-
-		idString := g[0][1]
-		id, err := strconv.Atoi(idString)
-
+		err := prod.FromJSON(r.Body)
 		if err != nil {
-			p.logger.Println("Invalid URl unable to conver num")
-			http.Error(rw,"Invalid URL", http.StatusBadRequest)
+			p.logger.Println("[ERROR] deserialazing product", err)
+			http.Error(rw, "Error reading product", http.StatusBadRequest)
 			return
 		}
 
-		p.logger.Println("Got id", id)
-		p.updateProduct(id, rw, r)
-	}
-	// catch all
-	rw.WriteHeader(http.StatusMethodNotAllowed)
-}
+		err = prod.Validate()
+		if err != nil {
+			p.logger.Println("[ERROR] validating product", err)
+			http.Error(
+				rw,
+				fmt.Sprintf("Error validating product: %s", err),
+				http.StatusBadRequest,
+			)
+			return
+		}
 
-func (p *Product) getProducts(rw http.ResponseWriter, r *http.Request) {
-	lp := data.GetProductsList()
-	err := lp.ToJSON(rw)
-	if err != nil {
-		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
-	}
-}
+		ctx := context.WithValue(r.Context(), KeyProduct{}, prod)
+		req := r.WithContext(ctx)
 
-func (p *Product) addProduct(rw http.ResponseWriter, r *http.Request) {
-	p.logger.Println("Handle POST Product")
-
-	prod := &data.Product{}
-	err := prod.FromJSON(r.Body)
-	if err != nil {
-		http.Error(rw, "Unmarshal JSON", http.StatusBadRequest)
-	}
-
-	data.AddProduct(prod)
-	p.logger.Println("Prod: %#v", prod)
-}
-
-func (p *Product) updateProduct(id int, rw http.ResponseWriter, r *http.Request){
-	p.logger.Println("Handle PUT Product")
-
-	prod := &data.Product{}
-	err := prod.FromJSON(r.Body)
-	if err != nil {
-		http.Error(rw, "Unmarshal JSON", http.StatusBadRequest)
-	}
-
-	err = data.UpdateProduct(id, prod)
-	if err == data.ErrorProductNotFound {
-		http.Error(rw, "Product not found", http.StatusNotFound)
-		return
-	}
-
-	if err != nil {
-		http.Error(rw, "Product not found", http.StatusInternalServerError)
-		return
-	}
-	p.logger.Println("Prod: %#v", prod)
+		next.ServeHTTP(rw, req)
+	})
 }
