@@ -5,7 +5,16 @@ info:
   description: Documentation Product API
   title: of Product API
   version: 1.0.0
-paths: {}
+paths:
+  /products:
+    get:
+      description: Returns a list of products
+      operationId: listProducts
+      responses:
+        "200":
+          $ref: '#/responses/productsResponse'
+      tags:
+      - products
 produces:
 - application/json
 schemes:

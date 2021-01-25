@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3f51609d-b8fa-45e4-a5af-76a16c040e33" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/products_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handlers/delete.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handlers/get.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handlers/post.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handlers/put.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swagger.yaml" afterDir="false" />
+    <list default="true" id="3f51609d-b8fa-45e4-a5af-76a16c040e33" name="Default Changelist" comment="Add swagger and reactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/products.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/products.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/get.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/get.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/products.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/products.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/swagger.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +51,7 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Go Test.TestCheckValidation in github.com/kislikjeka/microservices/data">
+  <component name="RunManager" selected="Go Build.go build main.go">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="microservices" />
       <working_directory value="$PROJECT_DIR$" />
@@ -104,6 +97,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Add swagger and reactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add swagger and reactor" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

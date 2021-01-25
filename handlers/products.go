@@ -22,6 +22,14 @@ import (
 	"net/http"
 )
 
+//A list of products returns in the response
+// swagger:response productsResponse
+type productsResponse struct {
+	// All products in the system
+	// in: body
+	Body []data.Product
+}
+
 // Product is  http.Handler
 type Product struct {
 	logger *log.Logger
@@ -33,6 +41,7 @@ func NewProducts(l *log.Logger) *Product {
 
 type KeyProduct struct{}
 
+// Middleware for products
 func (p Product) MiddlewareProductValidation(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		prod := data.Product{}
