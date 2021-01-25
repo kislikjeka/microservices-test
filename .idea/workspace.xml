@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3f51609d-b8fa-45e4-a5af-76a16c040e33" name="Default Changelist" comment="Add swagger and reactor">
+    <list default="true" id="3f51609d-b8fa-45e4-a5af-76a16c040e33" name="Default Changelist" comment="Finish swagger path">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/get.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/get.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/products.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/products.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/swagger.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +100,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Add swagger and reactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add swagger and reactor" />
+    <MESSAGE value="Finish swagger path" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finish swagger path" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
